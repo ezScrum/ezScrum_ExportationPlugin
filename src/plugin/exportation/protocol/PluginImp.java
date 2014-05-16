@@ -16,7 +16,7 @@ public class PluginImp extends UIConfig {
 		 */
 		final PluginUI pluginUI = new PluginUI() {
 			public String getPluginID() {
-				return "StoryCountPlugin";
+				return "StoryCountChartPlugin";
 			}
 		};
 		ezScrumUIList.add(pluginUI);
@@ -38,7 +38,6 @@ public class PluginImp extends UIConfig {
             public List<String> getProjectPageIDList() {
 				List<String> projectPageIDList = new ArrayList<String>();
 				projectPageIDList.add("storyCountPage");
-//				projectPageIDList.add("analyseTeamCooperation_peoplePage");
 				return projectPageIDList;
             }
 

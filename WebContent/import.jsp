@@ -8,7 +8,7 @@
 <%@ page import="ntut.csie.ezScrum.plugin.PluginExtensioner" %>
 </head>
 <body>
-<% PluginExtensioner pluginExtensioner = new PluginExtensioner("StoryCountPlugin"); %>
+<% PluginExtensioner pluginExtensioner = new PluginExtensioner("StoryCountChartPlugin"); %>
 
 <!-- javascript has only one way(request to action) to talk with action -->
 <script type="text/javascript" src="<%=pluginExtensioner.getWebPluginRoot() %>webApp/plugin/exportation/protocol/action/StoryCountChartPanel.js"></script>

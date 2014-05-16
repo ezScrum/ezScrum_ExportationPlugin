@@ -16,10 +16,10 @@ import org.kohsuke.stapler.StaplerResponse;
 
 import plugin.exportation.webservice.EzScrumWebServiceController;
 
-public class StoryCountAction implements Action {
+public class StoryCountChartAction implements Action {
 	@Override
 	public String getUrlName() {
-		return "StoryCount";
+		return "StoryCountChart";
 	}
 
 //	public void doGetStoryPage(StaplerRequest request, StaplerResponse response) {
