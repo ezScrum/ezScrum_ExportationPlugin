@@ -20,8 +20,6 @@ Plugin.exportation.StoryCountReleasePanel = Ext.extend(Ext.Panel, {
 		var obj = this;
 		var username = this.getCookie("username");
 		var userpwd = this.getCookie("userpwd");
-//		var username = "YWRtaW4=";
-//		var userpwd = "YWRtaW4=";
 
 		Ext.Ajax.request({
 			url		: '/ezScrum/web-service/' + getURLParameter("PID") + '/release-plan/all?userName=' + username + '&password=' + userpwd,
