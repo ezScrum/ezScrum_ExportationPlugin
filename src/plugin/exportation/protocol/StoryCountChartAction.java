@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
 
 import ntut.csie.ezScrum.pic.core.IUserSession;
@@ -14,15 +15,13 @@ import ntut.csie.protocal.Action;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 
-import plugin.exportation.webservice.EzScrumWebServiceController;
-
 public class StoryCountChartAction implements Action {
 	@Override
 	public String getUrlName() {
 		return "StoryCountChart";
 	}
 
-//	public void doGetStoryPage(StaplerRequest request, StaplerResponse response) {
+	public void doGetStoryCountChartPage(StaplerRequest request, StaplerResponse response) {
 //		HttpSession session = request.getSession();
 //		ProjectInfoForm projectInfoForm = (ProjectInfoForm) session.getAttribute(IProjectSummaryEnum.PROJECT_INFO_FORM);
 //		IUserSession userSession = (IUserSession) session.getAttribute("UserSession");
@@ -44,5 +43,19 @@ public class StoryCountChartAction implements Action {
 //			if (writer != null)
 //				writer.close();
 //		}
-//	}
+		
+		System.out.println("TeST TEST TEST");
+		
+//		try {
+//			response.forward(this, "helloJSP", request);
+//		} catch (IOException | ServletException e) {
+//			System.out.println(e);
+//			System.out.println(e.getMessage());
+//		}
+	}
+	
+	private void writeStoryCountChartPage(StaplerResponse response) {
+		response.setContentType("text/html; charset=utf-8");
+		
+	}
 }
