@@ -42,6 +42,7 @@ public class StoryCountChart implements Action {
 			PrintWriter writer = response.getWriter();
 			while(input.hasNext()) {
 				writer.write(input.nextLine());
+				writer.write("\n");
 			}
 			input.close();
 		} catch (FileNotFoundException e) {

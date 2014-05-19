@@ -139,7 +139,7 @@ Plugin.exportation.StoryCountControlPanel = Ext.extend(Ext.Panel, {
 		
 		exportPanel.removeAll();
 		exportPanel.add({
-				html: '<iframe src="showStoryCountChart.do?' + queryString + '" width="820" height="650" frameborder="0" scrolling="auto"></iframe>',
+				html: '<iframe src="/ezScrum/plugin/StoryCountChart/getStoryCountChartPage?' + queryString + '" width="820" height="650" frameborder="0" scrolling="auto"></iframe>',
 				border: false
 			}
 		);
