@@ -1,6 +1,6 @@
 Ext.ns('Plugin.exportation');
 
-Plugin.exportation.StoryCountReleasePanel = Ext.extend(Ext.Panel, {
+Plugin.exportation.VelocityReleasePanel = Ext.extend(Ext.Panel, {
 	title		: 'Releases',
 	height		: 300,
 	width		: '25%',
@@ -12,7 +12,7 @@ Plugin.exportation.StoryCountReleasePanel = Ext.extend(Ext.Panel, {
 				items:[]
 		};
 		Ext.apply(this, Ext.apply(this.initialConfig, config));
-		Plugin.exportation.StoryCountReleasePanel.superclass.initComponent.apply(this, arguments);
+		Plugin.exportation.VelocityReleasePanel.superclass.initComponent.apply(this, arguments);
 		
 		this.createCheckboxs();
 	},
@@ -20,7 +20,7 @@ Plugin.exportation.StoryCountReleasePanel = Ext.extend(Ext.Panel, {
 		var obj = this;
 		var username = this.getCookie("username");
 		var userpwd = this.getCookie("userpwd");
-
+		
 		Ext.Ajax.request({
 			url		: '/ezScrum/web-service/' + getURLParameter("PID") + '/release-plan/all?userName=' + username + '&password=' + userpwd,
 			success	: function(response) {
@@ -42,8 +42,8 @@ Plugin.exportation.StoryCountReleasePanel = Ext.extend(Ext.Panel, {
 	},
 	checkChange: function() {
 		var obj = this;
-		var selectedPanel = Ext.getCmp('StoryCountSelectPanel_ID');
-		var exportbutton = Ext.getCmp('StoryCountExportButton');
+		var selectedPanel = Ext.getCmp('VelocitySelectPanel_ID');
+		var exportbutton = Ext.getCmp('VelocityExportButton');
 		
 		selectedPanel.removeAll();
 		for(var i=0; i<obj.items.length; i++) { 
@@ -72,18 +72,18 @@ Plugin.exportation.StoryCountReleasePanel = Ext.extend(Ext.Panel, {
 		return "";
 	}
 });
-Ext.reg('StoryCountReleasePanel', Plugin.exportation.StoryCountReleasePanel);
+Ext.reg('VelocityReleasePanel', Plugin.exportation.VelocityReleasePanel);
 
-Plugin.exportation.StoryCountSelectPanel = Ext.extend(Ext.Panel, {
+Plugin.exportation.VelocitySelectPanel = Ext.extend(Ext.Panel, {
 	title		: 'Selected',
 	height		: 300,
 	width		: '25%',
 	autoScroll	: true,
 	bodyStyle	: 'padding: 10px;'
 });
-Ext.reg('StoryCountSelectPanel', Plugin.exportation.StoryCountSelectPanel);
+Ext.reg('VelocitySelectPanel', Plugin.exportation.VelocitySelectPanel);
 
-Plugin.exportation.StoryCountControlPanel = Ext.extend(Ext.Panel, {
+Plugin.exportation.VelocityControlPanel = Ext.extend(Ext.Panel, {
 	border		: false,
 	layout		: {
 		type: 'hbox',
@@ -95,33 +95,33 @@ Plugin.exportation.StoryCountControlPanel = Ext.extend(Ext.Panel, {
 	initComponent: function() {
 		var config = {
 			items: [{
-			    	xtype	: 'StoryCountReleasePanel', 
-			    	ref		: 'StoryCountReleasePanel_ID',
-			    	id		: 'StoryCountReleasePanel_ID'
+			    	xtype	: 'VelocityReleasePanel', 
+			    	ref		: 'VelocityReleasePanel_ID',
+			    	id		: 'VelocityReleasePanel_ID'
 			    }, {
 			    	html	: '>>',
 			    	border	: false,
 			    	bodyStyle: 'margin:140px 50px 0px 50px'
 			    }, {
-			    	xtype	: 'StoryCountSelectPanel',
-			    	ref		: 'StoryCountSelectPanel_ID',
-			    	id		: 'StoryCountSelectPanel_ID'
+			    	xtype	: 'VelocitySelectPanel',
+			    	ref		: 'VelocitySelectPanel_ID',
+			    	id		: 'VelocitySelectPanel_ID'
 			    }, {
 			    	xtype	: 'button',
 			    	text	: 'Export',
 			    	handler	: this.doExport,
 			    	disabled: true,
 			    	style	: 'margin: 275px 0px 0px 50px;',
-			    	id      : 'StoryCountExportButton'
+			    	id      : 'VelocityExportButton'
 			    }
 			]
 		};
 		Ext.apply(this, Ext.apply(this.initialConfig, config));
-		Plugin.exportation.StoryCountControlPanel.superclass.initComponent.apply(this, arguments);
+		Plugin.exportation.VelocityControlPanel.superclass.initComponent.apply(this, arguments);
 	},
 	doExport: function() {
-		var exportPanel = Ext.getCmp('StoryCountExportPanel_ID');
-		var releasePanel = Ext.getCmp('StoryCountReleasePanel_ID');
+		var exportPanel = Ext.getCmp('VelocityExportPanel_ID');
+		var releasePanel = Ext.getCmp('VelocityReleasePanel_ID');
 		
 		//組合query string
 		var checked = [];
@@ -145,16 +145,16 @@ Plugin.exportation.StoryCountControlPanel = Ext.extend(Ext.Panel, {
 		
 		exportPanel.removeAll();
 		exportPanel.add({
-				html: '<iframe src="/ezScrum/plugin/Exportation/getStoryCountChartPage?' + queryString + '" width="820" height="650" frameborder="0" scrolling="auto"></iframe>',
+				html: '<iframe src="/ezScrum/plugin/Exportation/getVelocityChartPage?' + queryString + '&PID=' + getURLParameter("PID") + '" width="820" height="650" frameborder="0" scrolling="auto"></iframe>',
 				border: false
 			}
 		);
 		exportPanel.doLayout();
 	}
 });
-Ext.reg('StoryCountControlPanel', Plugin.exportation.StoryCountControlPanel);
+Ext.reg('VelocityControlPanel', Plugin.exportation.VelocityControlPanel);
 
-Plugin.exportation.StoryCountExportPanel = Ext.extend(Ext.Panel, {
+Plugin.exportation.VelocityExportPanel = Ext.extend(Ext.Panel, {
 	border		: true,
 	layout		: {
 		type: 'hbox',
@@ -165,28 +165,28 @@ Plugin.exportation.StoryCountExportPanel = Ext.extend(Ext.Panel, {
 	width		: '100%',
 	autoScroll	: true
 });
-Ext.reg('StoryCountExportPanel', Plugin.exportation.StoryCountExportPanel);
+Ext.reg('VelocityExportPanel', Plugin.exportation.VelocityExportPanel);
 
-Plugin.exportation.StoryCountChartPanel = Ext.extend(Ext.Panel, {
-	id			: 'StoryCountChartPanel_ID',
-	title		: 'Story Count Chart',
+Plugin.exportation.VelocityChartPanel = Ext.extend(Ext.Panel, {
+	id			: 'VelocityChartPanel_ID',
+	title		: 'Velocity Chart',
 	border		: false,
 	layout		: 'anchor',
 	initComponent: function() {
 		var config = {
 			items: [{
-					xtype	: 'StoryCountControlPanel', 
-					ref		: 'StoryCountControlPanel_ID',
-					id		: 'StoryCountControlPanel_ID'
+					xtype	: 'VelocityControlPanel', 
+					ref		: 'VelocityControlPanel_ID',
+					id		: 'VelocityControlPanel_ID'
 				}, {
-					xtype	: 'StoryCountExportPanel',
-					ref		: 'StoryCountExportPanel_ID',
-					id		: 'StoryCountExportPanel_ID'
+					xtype	: 'VelocityExportPanel',
+					ref		: 'VelocityExportPanel_ID',
+					id		: 'VelocityExportPanel_ID'
 				}
 			]
 		}
 		Ext.apply(this, Ext.apply(this.initialConfig, config));
-		Plugin.exportation.StoryCountChartPanel.superclass.initComponent.apply(this, arguments);
+		Plugin.exportation.VelocityChartPanel.superclass.initComponent.apply(this, arguments);
 	}
 });
-Ext.reg('StoryCountChartPanel', Plugin.exportation.StoryCountChartPanel);
+Ext.reg('VelocityChartPanel', Plugin.exportation.VelocityChartPanel);

@@ -8,10 +8,11 @@
 <%@ page import="ntut.csie.ezScrum.plugin.PluginExtensioner" %>
 </head>
 <body>
-<% PluginExtensioner pluginExtensioner = new PluginExtensioner("StoryCountChartPlugin"); %>
+<% PluginExtensioner pluginExtensioner = new PluginExtensioner("ExportationPlugin"); %>
 
 <!-- javascript has only one way(request to action) to talk with action -->
 <script type="text/javascript" src="<%=pluginExtensioner.getWebPluginRoot() %>webApp/plugin/exportation/protocol/action/StoryCountChartPanel.js"></script>
+<script type="text/javascript" src="<%=pluginExtensioner.getWebPluginRoot() %>webApp/plugin/exportation/protocol/action/VelocityChartPanel.js"></script>
 <script type="text/javascript" src="<%=pluginExtensioner.getWebPluginRoot() %>webApp/plugin/exportation/protocol/action/ProjectPages.js"></script>
 <script type="text/javascript" src="<%=pluginExtensioner.getWebPluginRoot() %>webApp/plugin/exportation/protocol/action/ProjectLeftTree.js"></script>
 </body>

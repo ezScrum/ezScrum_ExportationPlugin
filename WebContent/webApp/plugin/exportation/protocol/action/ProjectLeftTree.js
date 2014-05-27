@@ -8,8 +8,8 @@ Plugin.exportation.projectLeftTree.TreePlugin = Ext.extend(Object, {
 
 	onRender: function() {
 		var node = new Ext.tree.AsyncTreeNode({
-			text: 'Team Analysis',
-	    	id 	: 'teamAnalysis',
+			text: 'Exportation',
+	    	id 	: 'exportation',
 			expanded : true,
 			iconCls:'None',
         	cls:'treepanel-parent',
@@ -27,20 +27,20 @@ Plugin.exportation.projectLeftTree.TreePlugin = Ext.extend(Object, {
 						Ext.getCmp('left_panel').Plugin_Clicked = true;
 					}
 				}
-//			}, 
-//			{
-//				id:'analysisByTeam',
-//				text : '<u>Analysis by Team</u>',
-//				cls:'treepanel-leaf',
-//            	iconCls:'leaf-icon',
-//				leaf:true,
-//				listeners: {
-//					click: function(node, event) {
-//						var index = Ext.getCmp('content_panel').items.keys.indexOf("peoplePage");
-//						Ext.getCmp('content_panel').layout.setActiveItem(index);
-//						Ext.getCmp('left_panel').Plugin_Clicked = true;
-//					}
-//				}
+			}, 
+			{
+				id:'velocity',
+				text : '<u>Velocity Chart</u>',
+				cls:'treepanel-leaf',
+            	iconCls:'leaf-icon',
+				leaf:true,
+				listeners: {
+					click: function(node, event) {
+						var index = Ext.getCmp('content_panel').items.keys.indexOf("VelocityChart_Page");
+						Ext.getCmp('content_panel').layout.setActiveItem(index);
+						Ext.getCmp('left_panel').Plugin_Clicked = true;
+					}
+				}
 			}]
 		});
 
@@ -49,4 +49,4 @@ Plugin.exportation.projectLeftTree.TreePlugin = Ext.extend(Object, {
 	}
 });
 
-Ext.preg('storyCount', Plugin.exportation.projectLeftTree.TreePlugin);
+Ext.preg('exportation', Plugin.exportation.projectLeftTree.TreePlugin);

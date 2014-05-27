@@ -12,11 +12,11 @@ public class PluginImp extends UIConfig {
 	@Override
 	public void setEzScrumUIList(List<EzScrumUI> ezScrumUIList) {
 		/**
-		 * add PluginUI to  ezScrumUIList for DoD Plug-in
+		 * add PluginUI to ezScrumUIList for DoD Plug-in
 		 */
 		final PluginUI pluginUI = new PluginUI() {
 			public String getPluginID() {
-				return "StoryCountChartPlugin";
+				return "ExportationPlugin";
 			}
 		};
 		ezScrumUIList.add(pluginUI);
@@ -29,7 +29,7 @@ public class PluginImp extends UIConfig {
 			@Override
 			public List<String> getProjectLeftTreeIDList() {
 				List<String> projectLeftTreeIDList = new ArrayList<String>();
-				projectLeftTreeIDList.add("storyCount");
+				projectLeftTreeIDList.add("exportation");
 				return projectLeftTreeIDList;
 			}
 
@@ -37,7 +37,8 @@ public class PluginImp extends UIConfig {
 			@Override
             public List<String> getProjectPageIDList() {
 				List<String> projectPageIDList = new ArrayList<String>();
-				projectPageIDList.add("storyCountPage");
+				projectPageIDList.add("storyCountChartPage");
+				projectPageIDList.add("velocityChartPage");
 				return projectPageIDList;
             }
 

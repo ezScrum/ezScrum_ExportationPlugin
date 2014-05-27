@@ -1,13 +1,13 @@
 Ext.ns('Plugin.exportation');
 
-Plugin.exportation.storyCountPage = Ext.extend(Object, {
+Plugin.exportation.storyCountChartPage = Ext.extend(Object, {
 	init: function(cmp) {
 		this.hostCmp = cmp;
 		this.hostCmp.on('render', this.onRender, this, {delay: 200});
 	},
 
 	onRender: function() {
-		var StoryCountPage = new Ext.Panel({
+		var StoryCountChartPage = new Ext.Panel({
 			id			: 'StoryCountChart_Page',
 			layout		: 'anchor',
 			autoScroll	: true,
@@ -19,50 +19,37 @@ Plugin.exportation.storyCountPage = Ext.extend(Object, {
 				}
 			}
 		});
-//		panel = new Ext.Panel({
-//			id			: 'storyCountPage',
-//			title		: 'storyCountPage',
-//			height		: 300,
-//			width		: '25%',
-//			autoScroll	: true,
-//			bodyStyle	: 'padding: 10px;',
-//			releases	: [],
-//			initComponent: function() {
-//				ezScrum.VelocityReleasePanel.superclass.initComponent.apply(this, arguments);
-//				
-//			}
-//		});
 
-		this.hostCmp.add(StoryCountPage);
+		this.hostCmp.add(StoryCountChartPage);
 		this.hostCmp.doLayout();
 	}
 });
 
-Ext.preg('storyCountPage', Plugin.exportation.storyCountPage);
+Ext.preg('storyCountChartPage', Plugin.exportation.storyCountChartPage);
 
-//Plugin.analyseTeamCooperation.peoplePage = Ext.extend(Object, {
-//	init: function(cmp) {
-//		this.hostCmp = cmp;
-//		this.hostCmp.on('render', this.onRender, this, {delay: 200});
-//	},
-//
-//	onRender: function() {
-//		panel = new Ext.Panel({
-//			id			: 'peoplePage',
-//			title		: 'peoplePage',
-//			height		: 300,
-//			width		: '25%',
-//			autoScroll	: true,
-//			bodyStyle	: 'padding: 10px;',
-//			releases	: [],
-//			initComponent: function() {
-//				ezScrum.VelocityReleasePanel.superclass.initComponent.apply(this, arguments);
-//			},
-//		});
-//
-//		this.hostCmp.add(panel);
-//		this.hostCmp.doLayout();
-//	}
-//});
-//
-//Ext.preg('analyseTeamCooperation_peoplePage', Plugin.analyseTeamCooperation.peoplePage);
+Plugin.exportation.velocityChartPage = Ext.extend(Object, {
+	init: function(cmp) {
+		this.hostCmp = cmp;
+		this.hostCmp.on('render', this.onRender, this, {delay: 200});
+	},
+
+	onRender: function() {
+		var VelocityChartPage = new Ext.Panel({
+			id			: 'VelocityChart_Page',
+			layout		: 'anchor',
+			autoScroll	: true,
+			items : [
+			    { ref: 'VelocityChartPanel_ID', xtype : 'VelocityChartPanel' }
+			],
+			listeners : {
+				'show' : function() {
+				}
+			}
+		});
+
+		this.hostCmp.add(VelocityChartPage);
+		this.hostCmp.doLayout();
+	}
+});
+
+Ext.preg('velocityChartPage', Plugin.exportation.velocityChartPage);
