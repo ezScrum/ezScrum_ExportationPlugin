@@ -5,9 +5,7 @@
 </head>
 <body>
 <div>
-	<input onclick="resizeCanvas(600, 800)" type="radio" name="group" value="4*3" checked>4*3 
-	<input onclick="resizeCanvas(450, 800)" type="radio" name="group" value="16*9">16*9
-	<input onclick="resizeCanvas(535, 800)" type="radio" name="group" value="3*2">3*2
+amount of done stories in each sprint
 </div>
 <div id="image">
 </div>
@@ -70,22 +68,18 @@
     }
 
     function getReleaseInfo(releaseId) {
-    	var releaseInfo = {
-    			sprints: [],
-    			stories: []
-    	};
+    	var releaseInfo;
     	$.ajax({
-    		url: '/ezScrum/web-service/' + getQueryStringByName('PID') + '/release-plan/' + releaseId +'/all?userName=' + getCookie('username') + '&password=' + getCookie('userpwd'),
+    		url: '/ezScrum/web-service/' + getQueryStringByName('projectName') + '/release-plan/' + releaseId +'/all?username=' + getCookie('username') + '&password=' + getCookie('userpwd'),
     		type: 'GET',
     		dataType: 'json',
     		async: false,
-    		success: function(data) {
-    			releaseInfo.sprints = data.releasePlanDesc.sprintPlan;
-    			releaseInfo.stories = data.stories;
-    			},
-    			error: function(data) {
-    				alert('fail');
-                }
+    		success: function(release) {
+    			releaseInfo = release;
+			},
+			error: function(release) {
+				alert('fail');
+            }
     	});
     	return releaseInfo;
     }
@@ -108,40 +102,16 @@
     	return result[1];
     }
 
-	function getStories(sprintId) {
-		var stories = [];
-		$.ajax({
-			url : '/ezScrum/web-service/' + getQueryStringByName('PID')
-					+ '/sprint-backlog/' + sprintId + '/storylist?userName='
-					+ getCookie('username') + '&password='
-					+ getCookie('userpwd'),
-			type : 'GET',
-			dataType : 'json',
-			async : false,
-			success : function(data) {
-				stories = data.storyList;
-			},
-			error : function(data) {
-				alert('fail');
-			}
-		});
-		return stories;
-	}
-
-
 	function initChart() {
 		var releases = getReleases();
 		var totalStoryCount = 0;
 		var sprintCount = 0;
 		var sprintList = [];
         var closedStoryCount = 0;
-
 		for (var i = 0; i < releases.length; i++) {
 			for (var j = 0; j < releases[i].sprints.length; j++) {
 				sprintCount += 1;
 				var sprint = releases[i].sprints[j];
-				sprint.stories = getStories(sprint.id);
-				
                 closedStoryCount = 0;
                 
 				for (var k = 0; k < releases[i].sprints[j].stories.length; k++) {
@@ -152,7 +122,7 @@
 					totalStoryCount += 1;
 				}
 				sprintList.push({
-					id : sprint.id,
+					serial_id : sprint.serial_id,
 					closedStoryCount : closedStoryCount
 				});
 			}
@@ -176,7 +146,7 @@
 			closedStorycount += sprints[i].closedStoryCount;
 			ideal[i+1] = ideal[i] - totalStoryCount / sprints.length;
             descendStorycounts[i+1] = totalStoryCount - closedStorycount;
-            labelname[i+1] = 'sprint' + sprints[i].id;
+            labelname[i+1] = 'sprint' + sprints[i].serial_id;
             if (totalStoryCount > max) {
             	max = totalStoryCount;
             }
@@ -185,17 +155,17 @@
 		var lineChartData = {
 				labels : labelname,
 				datasets : [
-					{ // real line
+					{ // ideal line
 						fillColor : "rgba(255,255,255,0.0)",
 						strokeColor : "rgba(52, 152, 219,1)",
 						pointColor : "rgba(52, 152, 219,1)",
-						data : descendStorycounts
+						data : ideal
 					},
-					{ // ideal line
+					{ // real line
 						fillColor : "rgba(255,255,255,0.0)",
 						strokeColor : "rgba(231, 76, 60,1)",
 						pointColor : "rgba(231, 76, 60,1)",
-						data : ideal
+						data : descendStorycounts
 					}
 				]
 			};
@@ -220,14 +190,6 @@
 		};
 
 		var storycountChart = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData, options);
-	}
-
-	function resizeCanvas(height, width) {
-		$('#image').empty();
-		$('#canvas').prop('height', height);
-		$('#canvas').prop('width', width);
-		$('#canvas').show();
-		initChart();
 	}
 
 	$(document).ready(function() {

@@ -22,14 +22,14 @@ Plugin.exportation.StoryCountReleasePanel = Ext.extend(Ext.Panel, {
 		var userpwd = this.getCookie("userpwd");
 
 		Ext.Ajax.request({
-			url		: '/ezScrum/web-service/' + getURLParameter("PID") + '/release-plan/all?userName=' + username + '&password=' + userpwd,
+			url		: '/ezScrum/web-service/' + getURLParameter("projectName") + '/release-plan/all?username=' + username + '&password=' + userpwd,
 			success	: function(response) {
 				obj.releases = Ext.decode(response.responseText);
 				for(var i=0; i<obj.releases.length; i++) {
 					obj.add({
 						xtype		: 'checkbox',
-						boxLabel	: obj.releases[i].Name,
-						releaseId	: obj.releases[i].ID,
+						boxLabel	: obj.releases[i].name,
+						releaseId	: obj.releases[i].serial_id,
 						listeners	: {
 							check: function(checkbox, value) {
 								obj.checkChange();
@@ -125,7 +125,7 @@ Plugin.exportation.StoryCountControlPanel = Ext.extend(Ext.Panel, {
 		
 		//組合query string
 		var checked = [];
-		var queryString = "PID=" + getURLParameter("PID") + "&releases=";
+		var queryString = "projectName=" + getURLParameter("projectName") + "&releases=";
 		for(var i=0; i<releasePanel.items.length; i++) {
 			if(releasePanel.get(i).checked) {
 				checked.push(releasePanel.get(i).releaseId);
