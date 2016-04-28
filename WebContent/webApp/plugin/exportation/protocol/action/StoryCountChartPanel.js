@@ -24,7 +24,9 @@ Plugin.exportation.StoryCountReleasePanel = Ext.extend(Ext.Panel, {
 		Ext.Ajax.request({
 			url		: '/ezScrum/web-service/' + getURLParameter("projectName") + '/release-plan/all?username=' + username + '&password=' + userpwd,
 			success	: function(response) {
-				obj.releases = Ext.decode(response.responseText);
+				responseText = Ext.decode(response.responseText);
+				content = Ext.decode(responseText.content);
+				obj.releases = content;
 				for(var i=0; i<obj.releases.length; i++) {
 					obj.add({
 						xtype		: 'checkbox',
@@ -36,6 +38,16 @@ Plugin.exportation.StoryCountReleasePanel = Ext.extend(Ext.Panel, {
 							}
 						}
 					});
+				}
+			},
+			failure: function(response) {
+				statusCode = response.status;
+				if (statusCode === 500) {
+					Ext.example.msg('Exportation Plugin Error', 'fail due to internal server error');
+				} else {
+					responseText = Ext.decode(response.responseText);
+					errorMessage = responseText.message;
+					Ext.example.msg('Exportation Plugin Error', errorMessage);
 				}
 			}
 		});
